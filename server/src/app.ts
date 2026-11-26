@@ -6,6 +6,7 @@ import { apiLimiter } from "./middleware/rateLimiter.js"
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js"
 import { geocodingRoutes } from "./routes/geocodingRoutes.js"
 import { airQualityRoutes } from "./routes/airQualityRoutes.js"
+import { aiRoutes } from "./routes/aiRoutes.js"
 
 export const app = express()
 
@@ -37,7 +38,7 @@ app.get("/api/health", (_req, res) => {
 
 app.use("/api/geocoding", geocodingRoutes)
 app.use("/api/air-quality", airQualityRoutes)
-// Phase 4: app.use("/api/ai", aiRoutes)
+app.use("/api/ai", aiRoutes)
 
 app.use(notFoundHandler)
 app.use(errorHandler)

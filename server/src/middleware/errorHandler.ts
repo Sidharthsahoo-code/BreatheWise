@@ -38,6 +38,17 @@ export function errorHandler(err: unknown, _req: Request, res: Response, _next: 
     })
   }
 
+  // Errors from express.json(): malformed JSON (400) or a body over the size limit (413)
+  const bodyStatus = (err as { status?: number } | null)?.status
+  if (bodyStatus === 400 || bodyStatus === 413) {
+    return res.status(bodyStatus).json({
+      error: {
+        code: bodyStatus === 413 ? "PAYLOAD_TOO_LARGE" : "BAD_REQUEST",
+        message: bodyStatus === 413 ? "The request is too large." : "The request body is not valid JSON.",
+      },
+    })
+  }
+
   if (!env.isProd) console.error(err)
 
   return res.status(500).json({
