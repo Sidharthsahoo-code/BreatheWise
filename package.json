@@ -1,0 +1,14 @@
+{
+  "name": "breathewise",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BreatheWise - Urban Air Quality Intelligence & Personal Wellness Assistant",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently -n server,client -c green,blue \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix server && npm run build --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
