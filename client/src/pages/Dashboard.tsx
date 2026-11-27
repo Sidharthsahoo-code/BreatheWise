@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { AqiStandard } from "@/types/airQuality"
 import { formatLocationShort } from "@/utils/formatters"
+import { RecommendationCard } from "@/components/dashboard/RecommendationCard"
 
 function getGreeting() {
   const hour = new Date().getHours()
@@ -53,6 +54,7 @@ export default function Dashboard() {
     content = (
       <div className="space-y-6">
         <AQIOverview data={current} standard={aqiStandard} />
+        <RecommendationCard />
         <PollutantCards pollutants={current.pollutants} />
         <ForecastChart forecast={forecast} standard={aqiStandard} />
         <QuickAccess />
