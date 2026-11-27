@@ -60,3 +60,20 @@ export interface DailyPlan {
   slots: PlanSlot[]
   dataNotes: string[]
 }
+export interface IndoorChecklistItem {
+  title: string
+  detail: string
+  priority: Priority
+  effort: "low" | "medium" | "high"
+  category: "ventilation" | "cooking" | "cleaning" | "purifier" | "sources" | "other"
+}
+
+export interface IndoorAdvice {
+  summary: string
+  ventilation: { guidance: string; bestWindowTimes: string | null }
+  checklist: IndoorChecklistItem[]
+  cookingTips: string[]
+  dustAndCleaning: string[]
+  purifierGuidance: string
+  dataNotes: string[]
+}

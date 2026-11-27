@@ -1,7 +1,14 @@
 import { apiRequest } from "./api"
 import type { GeocodedLocation } from "@/types/airQuality"
-import type { FamilyProfile, RoutineActivity } from "@/types/family"
-import type { AiResult, ChatAnswer, ChatHistoryItem, DailyPlan, Recommendations } from "@/types/assistant"
+import type { FamilyProfile, IndoorAssessment, RoutineActivity } from "@/types/family"
+import type {
+  AiResult,
+  ChatAnswer,
+  ChatHistoryItem,
+  DailyPlan,
+  IndoorAdvice,
+  Recommendations,
+} from "@/types/assistant"
 
 // The server fetches the air data itself, so only the location goes over the wire
 export function toLocationPayload(location: GeocodedLocation) {
@@ -61,6 +68,14 @@ export function createDailyPlan(
         flexible: a.flexible,
       })),
     },
+    signal,
+  })
+}
+
+export function getIndoorAdvice(location: GeocodedLocation, assessment: IndoorAssessment, signal?: AbortSignal) {
+  return apiRequest<AiResult<IndoorAdvice>>("/ai/indoor-advice", {
+    method: "POST",
+    body: { location: toLocationPayload(location), assessment },
     signal,
   })
 }

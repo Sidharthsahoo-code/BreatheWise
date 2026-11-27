@@ -56,3 +56,64 @@ export const ACTIVITY_TYPES: Array<{
   { value: "evening-activity", label: "Evening activity", startTime: "18:00", durationMinutes: 60 },
   { value: "other", label: "Other", startTime: "12:00", durationMinutes: 30 },
 ]
+export type Ventilation = "poor" | "moderate" | "good"
+export type CookingFuel = "lpg" | "piped-gas" | "electric" | "induction" | "biomass" | "kerosene" | "other"
+export type IndoorSource =
+  | "tobacco-smoke"
+  | "incense-or-dhoop"
+  | "mosquito-coils"
+  | "candles"
+  | "pets"
+  | "aerosol-sprays"
+  | "construction-dust"
+
+export interface IndoorAssessment {
+  rooms: number
+  members: number
+  ventilation: Ventilation
+  cookingFuel: CookingFuel
+  kitchenExhaust: boolean
+  hasPurifier: boolean
+  indoorSources: IndoorSource[]
+  windowsFaceBusyRoad: boolean
+}
+
+export const DEFAULT_ASSESSMENT: IndoorAssessment = {
+  rooms: 3,
+  members: 3,
+  ventilation: "moderate",
+  cookingFuel: "lpg",
+  kitchenExhaust: false,
+  hasPurifier: false,
+  indoorSources: [],
+  windowsFaceBusyRoad: false,
+}
+
+export const MAX_ROOMS = 10
+export const MAX_HOUSEHOLD = 12
+
+export const VENTILATION_OPTIONS: Array<{ value: Ventilation; label: string; description: string }> = [
+  { value: "poor", label: "Poor", description: "Few or small windows, air often feels stuffy" },
+  { value: "moderate", label: "Moderate", description: "Some windows, limited cross-breeze" },
+  { value: "good", label: "Good", description: "Windows on opposite sides, easy cross-ventilation" },
+]
+
+export const COOKING_FUELS: Array<{ value: CookingFuel; label: string }> = [
+  { value: "lpg", label: "LPG cylinder" },
+  { value: "piped-gas", label: "Piped natural gas" },
+  { value: "electric", label: "Electric stove" },
+  { value: "induction", label: "Induction cooktop" },
+  { value: "biomass", label: "Wood, dung or charcoal" },
+  { value: "kerosene", label: "Kerosene" },
+  { value: "other", label: "Other" },
+]
+
+export const INDOOR_SOURCES: Array<{ value: IndoorSource; label: string }> = [
+  { value: "tobacco-smoke", label: "Tobacco smoking indoors" },
+  { value: "incense-or-dhoop", label: "Incense, dhoop or agarbatti" },
+  { value: "mosquito-coils", label: "Mosquito coils" },
+  { value: "candles", label: "Candles" },
+  { value: "pets", label: "Pets" },
+  { value: "aerosol-sprays", label: "Aerosol sprays or air fresheners" },
+  { value: "construction-dust", label: "Construction or renovation dust" },
+]
