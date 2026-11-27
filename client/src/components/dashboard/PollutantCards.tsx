@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
-import type { AqiLevel, PollutantKey, PollutantReading } from "@/types/airQuality"
-import { AQI_LEVEL_STYLES } from "@/utils/aqiUtils"
+import type { PollutantKey, PollutantReading } from "@/types/airQuality"
+import { AQI_LEVEL_STYLES, getGuidelineLevel } from "@/utils/aqiUtils"
 import { formatConcentration } from "@/utils/formatters"
 
 const ABOUT: Record<PollutantKey, string> = {
@@ -12,17 +12,9 @@ const ABOUT: Record<PollutantKey, string> = {
   co: "A colourless gas from incomplete combustion, such as traffic and cooking fires.",
 }
 
-function guidelineLevel(ratio: number): AqiLevel {
-  if (ratio <= 1) return "good"
-  if (ratio <= 2) return "moderate"
-  if (ratio <= 3) return "sensitive"
-  if (ratio <= 5) return "unhealthy"
-  return "very-unhealthy"
-}
-
 function PollutantCard({ pollutant }: { pollutant: PollutantReading }) {
   const { label, value, unit, ratioToGuideline: ratio, key } = pollutant
-  const style = ratio !== null ? AQI_LEVEL_STYLES[guidelineLevel(ratio)] : null
+  const style = ratio !== null ? AQI_LEVEL_STYLES[getGuidelineLevel(ratio)] : null
 
   return (
     <div className="flex flex-col rounded-2xl border bg-card p-4 shadow-xs">

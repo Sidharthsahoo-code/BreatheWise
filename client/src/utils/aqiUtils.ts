@@ -40,3 +40,11 @@ export const AQI_LEVEL_SUMMARY: Record<AqiLevel, string> = {
   "very-unhealthy": "Health effects are likely for many people. Avoid prolonged outdoor exertion where you can.",
   hazardous: "Serious risk for everyone. Stay indoors as much as possible and avoid outdoor exertion.",
 }
+// Pollutant level compared with its WHO guideline (1 means exactly at the guideline)
+export function getGuidelineLevel(ratio: number): AqiLevel {
+  if (ratio <= 1) return "good"
+  if (ratio <= 2) return "moderate"
+  if (ratio <= 3) return "sensitive"
+  if (ratio <= 5) return "unhealthy"
+  return "very-unhealthy"
+}
