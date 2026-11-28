@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { airQualityForecast, currentAirQuality } from "../controllers/airQualityController"
+import { airQualityForecast, currentAirQuality } from "../controllers/airQualityController.js"
 
 export const airQualityRoutes = Router()
 

@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express"
 import { z } from "zod"
-import { getAirQualityForecast, getCurrentAirQuality } from "../services/openMeteoService"
+import { getAirQualityForecast, getCurrentAirQuality } from "../services/openMeteoService.js"
 
 const coordinate = (min: number, max: number) =>
   z.string().trim().min(1).transform(Number).pipe(z.number().min(min).max(max))

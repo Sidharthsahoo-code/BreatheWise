@@ -9,7 +9,7 @@ import {
   dailyPlanRequestSchema,
   indoorRequestSchema,
   recommendationsRequestSchema,
-} from "../services/recommendationService"
+} from "../services/recommendationService.js"
 
 // Validates the body, runs the AI feature, and forwards any error to the error handler
 function handle<S extends z.ZodType>(schema: S, run: (input: z.output<S>) => Promise<unknown>) {

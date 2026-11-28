@@ -10,6 +10,13 @@ export interface AirQualityState {
   retry: () => void
 }
 
+export interface AirQualityRange {
+  pastDays: number
+  forecastDays: number
+}
+
+const DEFAULT_RANGE: AirQualityRange = { pastDays: 3, forecastDays: 3 }
+
 interface Result {
   requestKey: string
   current?: CurrentAirQuality
@@ -17,19 +24,20 @@ interface Result {
   error?: Error
 }
 
-export function useAirQualityData(location: GeocodedLocation): AirQualityState {
+export function useAirQualityData(location: GeocodedLocation, range: AirQualityRange = DEFAULT_RANGE): AirQualityState {
   const { latitude, longitude } = location
+  const { pastDays, forecastDays } = range
   const [attempt, setAttempt] = useState(0)
   const [result, setResult] = useState<Result | null>(null)
 
-  const requestKey = `${latitude},${longitude},${attempt}`
+  const requestKey = `${latitude},${longitude},${pastDays},${forecastDays},${attempt}`
 
   useEffect(() => {
     const controller = new AbortController()
 
     Promise.all([
       getCurrentAirQuality(latitude, longitude, controller.signal),
-      getAirQualityForecast(latitude, longitude, { pastDays: 3, forecastDays: 3 }, controller.signal),
+      getAirQualityForecast(latitude, longitude, { pastDays, forecastDays }, controller.signal),
     ])
       .then(([current, forecast]) => setResult({ requestKey, current, forecast }))
       .catch((err: unknown) => {
@@ -38,7 +46,7 @@ export function useAirQualityData(location: GeocodedLocation): AirQualityState {
       })
 
     return () => controller.abort()
-  }, [latitude, longitude, requestKey])
+  }, [latitude, longitude, pastDays, forecastDays, requestKey])
 
   const ready = result && result.requestKey === requestKey ? result : null
 

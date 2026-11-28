@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express"
 import { z } from "zod"
-import { searchLocations } from "../services/openMeteoService"
+import { searchLocations } from "../services/openMeteoService.js"
 
 const querySchema = z.object({
   q: z.string().trim().min(2, "Enter at least 2 characters.").max(100),

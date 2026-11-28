@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { searchGeocoding } from "../controllers/geocodingController"
+import { searchGeocoding } from "../controllers/geocodingController.js"
 
 export const geocodingRoutes = Router()
 

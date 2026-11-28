@@ -1,6 +1,6 @@
 import { z } from "zod"
-import { AppError } from "../middleware/errorHandler"
-import { generateJson, type ChatTurn } from "./geminiService"
+import { AppError } from "../middleware/errorHandler.js"
+import { generateJson, type ChatTurn } from "./geminiService.js"
 import {
   DATA_SOURCE,
   getAirQualityForecast,
@@ -8,7 +8,7 @@ import {
   type AirQualityForecast,
   type AqiReading,
   type CurrentAirQuality,
-} from "./openMeteoService"
+} from "./openMeteoService.js"
 
 /* ---------- Request contracts ---------- */
 

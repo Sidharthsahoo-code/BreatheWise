@@ -1,4 +1,4 @@
-import { AppError } from "../middleware/errorHandler"
+import { AppError } from "../middleware/errorHandler.js"
 import {
   AQI_STANDARDS,
   POLLUTANTS,
@@ -6,7 +6,7 @@ import {
   ratioToGuideline,
   type AqiCategory,
   type PollutantKey,
-} from "../utils/aqiCalculator"
+} from "../utils/aqiCalculator.js"
 
 const GEOCODING_URL = "https://geocoding-api.open-meteo.com/v1/search"
 const AIR_QUALITY_URL = "https://air-quality-api.open-meteo.com/v1/air-quality"

@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { chat, dailyPlan, indoorAdvice, recommendations } from "../controllers/aiController"
-import { aiLimiter } from "../middleware/rateLimiter"
+import { chat, dailyPlan, indoorAdvice, recommendations } from "../controllers/aiController.js"
+import { aiLimiter } from "../middleware/rateLimiter.js"
 
 export const aiRoutes = Router()
 
